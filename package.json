@@ -1,23 +1,38 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "gatsby-starter-hello-ts",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "A simplified Ts bare-bones starter for Gatsby",
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",
+    "clean": "rm -rf .cache && yarn start",
+    "debug": "nodemon --exec \"node --inspect-brk --no-lazy node_modules/.bin/gatsby develop\"",
+    "develop": "nodemon --exec \"gatsby develop\"",
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+    "lint": "eslint . --ext ts --ext tsx",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "start": "yarn develop",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+    "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
+    "@types/react": "^16.8.23",
     "gatsby": "^2.13.13",
+    "gatsby-plugin-typescript": "^2.1.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "typescript": "^3.5.3"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-graphql": "^3.0.3",
+    "eslint-plugin-react": "^7.14.2",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.2.0",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
   },
   "repository": {
@@ -26,5 +41,34 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run type-check"
+    }
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "yarn lint",
+      "yarn prettier-write",
+      "git add"
+    ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".cache/*",
+      "public/*",
+      "schema.json",
+      "src/*"
+    ],
+    "delay": "1500"
+  },
+  "prettier": {
+    "bracketSpacing": true,
+    "proseWrap": "always",
+    "semi": false,
+    "singleQuote": false,
+    "trailingComma": "es5"
   }
 }
