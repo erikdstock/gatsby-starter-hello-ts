@@ -36,7 +36,7 @@
     "ts-jest": "^24.2.0",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
-    "nodemon": "^2.0.1",
+    "nodemon": "^1.19.1",
     "typescript": "^3.7.3"
   },
   "keywords": [
