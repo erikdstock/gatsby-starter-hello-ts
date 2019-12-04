@@ -6,7 +6,7 @@ module.exports = {
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
-  snapshotSerializers: ["jest-emotion"],
+  // snapshotSerializers: ["jest-emotion"],
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
 
